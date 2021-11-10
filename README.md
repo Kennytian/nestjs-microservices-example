@@ -22,3 +22,10 @@ This API showcase consists of the following parts:
 - The service interact via **TCP sockets**
 
 This example uses a SINGLE database (MongoDB) instance for all microservices. **This is not a correct point, the correct way is to use a separate DB instance for every microservice.** I used one DB instance for all microservices to simplify this example.
+
+## Troubleshooting
+- https://github.com/Denrox/nestjs-microservices-example
+- docker rm -f $(docker ps -a | grep "nestjs")
+- docker network ls; docker network rm (about nestjs network items)
+- docker network create infrastructure && cp .env.example .env && docker-compose up -d
+- https://github.com/Denrox/nestjs-microservices-example/issues/5#issuecomment-895018483

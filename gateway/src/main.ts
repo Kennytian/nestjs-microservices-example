@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ConfigService } from './services/config/config.service';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,7 +13,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
-  await app.listen(new ConfigService().get('port'));
+  const configSrv = new ConfigService();
+  const port = +configSrv.get('port');
+  const apiPath = 'api';
+  SwaggerModule.setup(apiPath, app, document);
+  await app.listen(port);
+  Logger.debug(`${configSrv.get('hostname')}:${port}/${apiPath} ${new Date()}`);
 }
 bootstrap();

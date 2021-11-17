@@ -6,6 +6,7 @@ export class ConfigService {
   constructor() {
     this.envConfig = {};
     this.envConfig.port = process.env.API_GATEWAY_PORT;
+    this.envConfig.hostname = process.env.BASE_URI;
     this.envConfig.tokenService = {
       options: {
         port: process.env.TOKEN_SERVICE_PORT,

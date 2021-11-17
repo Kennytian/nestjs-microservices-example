@@ -5,6 +5,7 @@ import {
   ExecutionContext,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { Reflector } from '@nestjs/core';
@@ -23,6 +24,8 @@ export class PermissionGuard implements CanActivate {
       'permission',
       context.getHandler(),
     );
+
+    Logger.debug('PermissionGuard--permission===', permission);
 
     if (!permission) {
       return true;
@@ -47,6 +50,8 @@ export class PermissionGuard implements CanActivate {
         permissionInfo.status,
       );
     }
+
+    Logger.debug('PermissionGuard--permissionInfo===', permissionInfo);
 
     return true;
   }
